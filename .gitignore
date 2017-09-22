@@ -1,0 +1,9 @@
+videos/
+images/
+results/
+result/
+*.jpg
+*.avi
+*.mov
+*.pyc
+*~
