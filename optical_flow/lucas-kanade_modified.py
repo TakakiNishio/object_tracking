@@ -27,8 +27,6 @@ class Motion:
     def __init__(self):
         # display window
         cv2.namedWindow("motion")
-        # callback registeration of mouse ivents
-        cv2.setMouseCallback("motion", self.onMouse)
         # video
         self.video = cv2.VideoCapture(VIDEO_DATA)
         # interval
@@ -53,6 +51,10 @@ class Motion:
         self.gray_prev = cv2.cvtColor(self.frame, cv2.COLOR_BGR2GRAY)
 
         while end_flag:
+
+            # load point
+            self.load_point()
+
             # convert the frame into gray scale
             self.gray_next = cv2.cvtColor(self.frame, cv2.COLOR_BGR2GRAY)
 
@@ -108,10 +110,9 @@ class Motion:
     # specify the feature point by mouse click
     #   delete the feature point if there is another feature point near clicked point
     #   add the feature point if there is no another feature point near clicked point
-    def onMouse(self, event, x, y, flags, param):
-        # other than left click
-        if event != cv2.EVENT_LBUTTONDOWN:
-            return
+    def load_point(self):
+        x = 190
+        y = 190
 
         # add initial feature point
         if self.features is None:
