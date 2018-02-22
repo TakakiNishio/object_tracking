@@ -33,7 +33,8 @@ if __name__ == '__main__':
     # http://cs.stanford.edu/people/davheld/public/GOTURN/trained_model/tracker.caffemodel
     # tracker = cv2.TrackerGOTURN_create()
 
-    cap = cv2.VideoCapture(1)
+    cap = cv2.VideoCapture(0)
+    # cap = cv2.VideoCapture("3.avi")
 
     while True:
         ret, frame = cap.read()
