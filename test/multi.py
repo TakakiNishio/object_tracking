@@ -40,7 +40,7 @@ if __name__ == '__main__':
         ret, frame = cap.read()
         if not ret:
             continue
-        frame = frame_resize(frame)
+        # frame = frame_resize(frame)
         bbox = (0,0,10,10)
         bbox = cv2.selectROI(frame, False)
         ok = tracker.init(frame, bbox)
@@ -50,7 +50,7 @@ if __name__ == '__main__':
     while True:
         # VideoCaptureから1フレーム読み込む
         ret, frame = cap.read()
-        frame = frame_resize(frame)
+        # frame = frame_resize(frame)
         if not ret:
             k = cv2.waitKey(1)
             if k == 27 :
