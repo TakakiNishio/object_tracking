@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import cv2
+import argparse
+
 
 def frame_resize(frame, n=2):
     # """
@@ -19,10 +21,10 @@ if __name__ == '__main__':
     # tracker = cv2.TrackerMIL_create()
 
     # KCF
-    tracker = cv2.TrackerKCF_create()
+    # tracker = cv2.TrackerKCF_create()
 
     # TLD #GPUコンパイラのエラーが出ているっぽい
-    # tracker = cv2.TrackerTLD_create()
+    tracker = cv2.TrackerTLD_create()
 
     # MedianFlow
     # tracker = cv2.TrackerMedianFlow_create()
@@ -33,8 +35,18 @@ if __name__ == '__main__':
     # http://cs.stanford.edu/people/davheld/public/GOTURN/trained_model/tracker.caffemodel
     # tracker = cv2.TrackerGOTURN_create()
 
-    cap = cv2.VideoCapture(0)
-    # cap = cv2.VideoCapture("3.avi")
+     # setup some arguments
+    parser = argparse.ArgumentParser(description='yolov2_darknet_predict for video')
+    parser.add_argument('--video_file', '-v', type=str, default=False,help='path to video')
+    parser.add_argument('--camera_ID', '-c', type=int, default=0,help='camera ID')
+    parser.add_argument('--save_name', '-s', type=str, default=False,help='camera ID')
+    args = parser.parse_args()
+
+    # prepare to get image frames
+    if not args.video_file == False:
+        cap = cv2.VideoCapture(args.video_file)
+    else:
+        cap = cv2.VideoCapture(args.camera_ID)
 
     while True:
         ret, frame = cap.read()
@@ -44,7 +56,7 @@ if __name__ == '__main__':
         bbox = (0,0,10,10)
         bbox = cv2.selectROI(frame, False)
         ok = tracker.init(frame, bbox)
-        cv2.destroyAllWindows()
+        # cv2.destroyAllWindows()
         break
 
     while True:
