@@ -7,4 +7,6 @@ result/
 *.mov
 *.mp4
 *.pyc
+*.caffemodel
+*.prototext
 *~
